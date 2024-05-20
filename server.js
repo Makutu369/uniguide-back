@@ -5,6 +5,7 @@ import express from "express";
 import user from "./routes/usersRoute.js";
 import dotenv from "dotenv";
 import genres from "./routes/genres.js";
+import schools from "./routes/universities.js";
 import cors from "cors";
 dotenv.config();
 const app = express();
@@ -19,4 +20,5 @@ mongoose
 
 app.use("/user", user);
 app.use("/genres", genres);
+app.use("/universities", schools);
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
