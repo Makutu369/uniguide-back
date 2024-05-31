@@ -1,6 +1,8 @@
 import { User } from "../../models/user.js";
 import jwt from "jsonwebtoken";
 import { emailSignature } from "./env.js";
+import bcrypt from "bcrypt";
+import { sendMail } from "../../utils/sendMail.js";
 
 //register controller
 const registerController = async (req, res) => {
@@ -21,12 +23,8 @@ const registerController = async (req, res) => {
 
   //create a verfification link and send it
   const token = jwt.sign({ email }, emailSignature);
-  const verificationLink = `${process.env.baseUrl}/verify-email?token=${token}`;
-  const error = sendMail(email, verificationLink);
-  if (!error)
-    return res
-      .status(400)
-      .json({ error: "there was an error sending to email" });
+  const verificationLink = `http:localhost:5173/verified/${token}`;
+  sendMail(email, verificationLink);
 
   //save student in database and send a response to the client
   student.save();

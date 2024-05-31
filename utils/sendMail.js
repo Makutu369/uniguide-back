@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
+import { compareSync } from "bcrypt";
 dotenv.config();
 
 //environmentals
@@ -33,7 +34,7 @@ const sendMail = async (email, verificationLink) => {
     console.log("message sent successfully");
     return null;
   } catch (e) {
-    return e;
+    console.log(e);
   }
 };
 //exporting our variables

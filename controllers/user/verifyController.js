@@ -3,17 +3,19 @@ import { emailSignature } from "./env.js";
 import jwt from "jsonwebtoken";
 
 const verifyController = async (req, res) => {
-  const loginLink = "http://localhost:5172/Login";
-  const { token } = req.query;
-  const decoded = jwt.verify(token, emailSignature);
-  if (!decoded)
-    return res
-      .status(400)
-      .json({ message: "invalid request", reason: "no token found" });
-  const { email } = decoded;
-  const student = User.findOne({ email });
-  if (!student) return res.status(400).json({ message: "student not found" });
-  res.json({ message: `login link at ${loginLink}` });
+  const { token } = req.params;
+  try {
+    const decoded = jwt.verify(token, emailSignature);
+    const { email } = decoded;
+    const student = await User.findOne({ email });
+    student.verified = true;
+    await student.save();
+    if (!student) return res.status(400).json({ message: "student not found" });
+    res.status(200).json({ message: `login link at ` });
+  } catch (error) {
+    return res.status(400).json({ error, message: "invalid token" });
+  }
+  if (!token) return res.status(400).json({ message: " not token found" });
 };
 
 export { verifyController };

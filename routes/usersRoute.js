@@ -5,6 +5,6 @@ import { signController } from "../controllers/user/signController.js";
 import { verifyController } from "../controllers/user/verifyController.js";
 router.post("/register", registerController);
 router.post("/sign", signController);
-router.get("/verify-email", verifyController);
+router.get("/verify-email/:token", verifyController);
 
 export default router;
