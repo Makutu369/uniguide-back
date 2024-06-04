@@ -17,7 +17,7 @@ mongoose
   .catch((err) => console.log(err.message));
 
 app.get("/", (req, res) => {
-  res.json({ message: "hello world" });
+  res.json({ message: "hello world kwame" });
 });
 app.use("/user", user);
 app.use("/genres", genres);
