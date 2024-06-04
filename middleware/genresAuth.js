@@ -7,7 +7,6 @@ const authorise = (req, res, next) => {
   try {
     const payload = jwt.verify(token, "lama");
     req.user = payload;
-    console.log(payload);
     next();
   } catch (e) {
     console.log(e.message);
