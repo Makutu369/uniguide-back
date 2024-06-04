@@ -16,6 +16,9 @@ mongoose
   .then(() => console.log("db success"))
   .catch((err) => console.log(err.message));
 
+app.get("/", (req, res) => {
+  res.json({ message: "hello world" });
+});
 app.use("/user", user);
 app.use("/genres", genres);
 app.use("/universities", schools);
