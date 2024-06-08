@@ -5,6 +5,6 @@ const schema = new mongoose.Schema({
   region: String,
 });
 
-const Schools = mongoose.model("universities", schema);
+const Schools = mongoose.model("Universities", schema);
 
 export { Schools };
