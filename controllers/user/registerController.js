@@ -3,7 +3,8 @@ import jwt from "jsonwebtoken";
 import { emailSignature } from "./env.js";
 import bcrypt from "bcrypt";
 import { sendMail } from "../../utils/sendMail.js";
-
+import dotenv from "dotenv";
+dotenv.config();
 //register controller
 const registerController = async (req, res) => {
   const { email, password } = req.body;
@@ -22,8 +23,8 @@ const registerController = async (req, res) => {
   });
 
   //create a verfification link and send it
-  const token = jwt.sign({ email }, emailSignature);
-  const verificationLink = `https://frontend-fawn-two-38.vercel.app/verified?q=${token}`;
+  const token = jwt.sign({ email }, process.env.emailPrivateKey);
+  const verificationLink = `${process.env.frontUrl}/verified?q=${token}`;
   sendMail(email, verificationLink);
 
   //save student in database and send a response to the client
