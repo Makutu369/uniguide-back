@@ -15,7 +15,9 @@ const verifyController = async (req, res) => {
     student.verified = true;
     await student.save();
     if (!student) return res.status(400).json({ message: "student not found" });
-    res.status(200).json({ message: `user is verified can now login` });
+    res
+      .status(200)
+      .json({ message: `your account has been verified succesfully` });
   } catch (error) {
     return res.status(400).json({ error, message: "invalid token" });
   }
