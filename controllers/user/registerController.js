@@ -23,7 +23,7 @@ const registerController = async (req, res) => {
 
   //create a verfification link and send it
   const token = jwt.sign({ email }, emailSignature);
-  const verificationLink = `http:localhost:5173/verified/${token}`;
+  const verificationLink = `https://frontend-fawn-two-38.vercel.app/verified/${token}`;
   sendMail(email, verificationLink);
 
   //save student in database and send a response to the client
